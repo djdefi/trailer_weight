@@ -49,7 +49,7 @@ Expected in lbs.
 
 ### gross-vehicle-weight (GVWR)
 
-Below `MFD. BY FORD MOTO CO.`:
+Below `MFD. BY FORD MOTOR CO.`:
 
 ![Ford F-150 Door dticker denoting the GVWR](https://user-images.githubusercontent.com/3662109/155672961-141c8e35-f053-4d36-8da7-89de5522174c.png)
 
