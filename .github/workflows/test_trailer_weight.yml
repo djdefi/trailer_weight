@@ -26,4 +26,4 @@ jobs:
           gem install rspec optparse
 
       - name: Run RSpec tests
-        run: bundle exec rspec --format documentation
+        run: rspec --format documentation
