@@ -19,13 +19,14 @@ require 'optparse'
 # Optionally a gross vehicle weight can be specified   --gross-vehicle-weight=1200
 # If no options are specified, the script will provide a usage message
 
+# Parse command line options and assign to variables
 options = {}
 
 OptionParser.new do |opts|
   opts.banner = 'Usage: trailer_weight.rb [options]'
 
   opts.on('-c', '--cargo=VAL', 'Comma separated list of cargo weights. Default = 210,180,40,125') do |v|
-    options[:cargo] = v.split(',')
+    options[:cargo] = v.split(',').map(&:to_i)
   end
   opts.on('-m', '--max-weight=VAL', 'Max combined weight of cargo and occupants. Default = 1500') do |v|
     options[:max_weight] = v.to_i
@@ -44,43 +45,35 @@ OptionParser.new do |opts|
 end.parse!
 
 # Validate options
-if options[:max_weight].nil?
+unless options[:max_weight]
   puts 'ERROR: You must specify a max combined weight'
   puts 'Usage: trailer_weight.rb [options]'
   exit
 end
 
 # Set defaults
-options[:cargo] = [210, 180, 40, 125] unless options[:cargo]
-unless options[:gross_vehicle_weight]
-  options[:gross_vehicle_weight] = options[:max_weight]
-end
+options[:cargo] ||= [210, 180, 40, 125]
+options[:gross_vehicle_weight] ||= options[:max_weight]
 
-# Convert cargo string to integer array if needed
-options[:cargo] = options[:cargo].map(&:to_i)
-
-# Subtract cargo from max combined weight and devide by .13 to get gross trailer weight
-gross_trailer_weight = (options[:max_weight] - options[:cargo].inject(0, :+)) / 0.13
-
-# Round to nearest integer
+# Calculate gross trailer weight
+gross_trailer_weight = (options[:max_weight] - options[:cargo].sum) / 0.13
 gross_trailer_weight = gross_trailer_weight.round
 
 puts "Max towable gross trailer weight: #{gross_trailer_weight}"
 
-# If gross vehicle weight is present: Subtract your truck payload you just calculated from it (truck, wife, kid, dog), this is your truck’s weight.
-# Subtract this from the gross combined vehicle weight and it should be around the same as above formula
-if options[:gross_vehicle_weight] != [:max_weight]
-  truck_weight = options[:gross_vehicle_weight] - (options[:max_weight] - options[:cargo].inject(0, :+))
+# Calculate and display truck weight if gross vehicle weight is provided
+if options[:gross_vehicle_weight] != options[:max_weight]
+  truck_weight = options[:gross_vehicle_weight] - (options[:max_weight] - options[:cargo].sum)
   puts "Loaded Truck weight: #{truck_weight}"
 
-  # Subtract truck weight from gross gross_vehicle_weight weight
   alt_weight = options[:gross_vehicle_weight] - truck_weight
   puts "Remaining weight: #{alt_weight}"
 end
 
-# If verbose option is specified, print out combined cargo weight, max combined weight, and gross vehicle weight
+# Output additional information if verbose mode is enabled
 if options[:verbose]
-  puts "Combined cargo weight: #{options[:cargo].inject(0, :+)}"
+  puts "Combined cargo weight: #{options[:cargo].sum}"
   puts "Max combined weight: #{options[:max_weight]}"
   puts "Gross vehicle weight: #{options[:gross_vehicle_weight]}"
 end
+
