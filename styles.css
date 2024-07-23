@@ -8,6 +8,7 @@ body {
     justify-content: center;
     min-height: 100vh;
     background-color: #f4f4f4;
+    color: #333;
 }
 
 h1 {
@@ -69,4 +70,66 @@ button:hover {
 
 #results p {
     margin: 5px 0;
+}
+
+.tooltip {
+    display: inline-block;
+    margin-left: 5px;
+    cursor: pointer;
+    color: #007bff;
+}
+
+.tooltip:hover {
+    color: #0056b3;
+}
+
+#help-section {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #333;
+        color: #f4f4f4;
+    }
+
+    form, #results, #help-section {
+        background: #444;
+        color: #f4f4f4;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+        background: #555;
+        color: #f4f4f4;
+        border: 1px solid #666;
+    }
+
+    button {
+        background-color: #0056b3;
+    }
+
+    button:hover {
+        background-color: #007bff;
+    }
+}
+
+@media (max-width: 600px) {
+    form, #results, #help-section {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    button {
+        font-size: 14px;
+        padding: 8px;
+    }
 }
