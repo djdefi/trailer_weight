@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trailer Weight Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Trailer Weight Calculator</h1>
+    <form id="calculator-form">
+        <label for="cargo">Cargo Weights (comma separated):</label>
+        <input type="text" id="cargo" name="cargo" required>
+        
+        <label for="max-weight">Max Combined Weight:</label>
+        <input type="number" id="max-weight" name="max-weight" required>
+        
+        <label for="gross-vehicle-weight">Gross Vehicle Weight:</label>
+        <input type="number" id="gross-vehicle-weight" name="gross-vehicle-weight" required>
+        
+        <button type="button" id="calculate-button">Calculate</button>
+    </form>
+    <div id="results">
+        <h2>Results</h2>
+        <p id="max-trailer-weight"></p>
+        <p id="loaded-truck-weight"></p>
+        <p id="remaining-weight"></p>
+        <p id="combined-cargo-weight"></p>
+        <p id="max-combined-weight"></p>
+        <p id="gross-vehicle-weight-result"></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

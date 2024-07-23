@@ -53,3 +53,16 @@ Below `MFD. BY FORD MOTOR CO.`:
 
 ![Ford F-150 Door dticker denoting the GVWR](https://user-images.githubusercontent.com/3662109/155672961-141c8e35-f053-4d36-8da7-89de5522174c.png)
 
+## Web Interface
+
+You can also use the Trailer Weight Calculator through a web interface. The web interface allows you to input cargo weights, max weight, and gross vehicle weight, and calculates the trailer weight for you.
+
+Access the web interface here: [Trailer Weight Calculator](https://your-github-username.github.io/trailer_weight/)
+
+### Instructions for using the web interface:
+
+1. Open the [Trailer Weight Calculator](https://your-github-username.github.io/trailer_weight/) in your web browser.
+2. Enter the cargo weights as a comma-separated list in the "Cargo Weights" field.
+3. Enter the max combined weight in the "Max Combined Weight" field.
+4. Enter the gross vehicle weight in the "Gross Vehicle Weight" field.
+5. Click the "Calculate" button to see the results.
