@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const payloadUtilization = document.getElementById('payload-utilization');
     const weightDistributionRatio = document.getElementById('weight-distribution-ratio');
 
+    // Initialize tooltips
+    initializeTooltips();
+
     calculateButton.addEventListener('click', function() {
         // Clear any previous error messages
         clearErrors();
@@ -96,5 +99,42 @@ document.addEventListener('DOMContentLoaded', function() {
         const existingErrors = form.querySelectorAll('.error-message');
         existingErrors.forEach(error => error.remove());
         results.style.display = 'none';
+    }
+
+    function initializeTooltips() {
+        const tooltips = document.querySelectorAll('.tooltip');
+        
+        tooltips.forEach(tooltip => {
+            const targetId = tooltip.getAttribute('aria-describedby');
+            const description = document.getElementById(targetId);
+            
+            if (description) {
+                // Show tooltip on hover
+                tooltip.addEventListener('mouseenter', function() {
+                    description.classList.add('show');
+                });
+                
+                // Hide tooltip when mouse leaves
+                tooltip.addEventListener('mouseleave', function() {
+                    description.classList.remove('show');
+                });
+                
+                // Show tooltip on focus (for keyboard navigation)
+                tooltip.addEventListener('focus', function() {
+                    description.classList.add('show');
+                });
+                
+                // Hide tooltip on blur
+                tooltip.addEventListener('blur', function() {
+                    description.classList.remove('show');
+                });
+                
+                // Toggle tooltip on click (for touch devices)
+                tooltip.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    description.classList.toggle('show');
+                });
+            }
+        });
     }
 });

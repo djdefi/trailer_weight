@@ -145,8 +145,7 @@ button:hover {
     color: #6c757d;
 }
 
-.tooltip:hover + .tooltip-description,
-.tooltip:focus + .tooltip-description {
+.tooltip-description.show {
     display: block;
 }
 
