@@ -58,8 +58,50 @@
             <h3>Using Trailer Specifications for Comparison 
                 <span class="tooltip" aria-describedby="trailer-specs-tooltip" role="button" tabindex="0" aria-label="Help for using trailer specifications">?</span>
             </h3>
-            <div id="trailer-specs-tooltip" class="tooltip-description" role="tooltip">DO NOT enter trailer weights in the input boxes above - those are for your truck only. Instead, find your trailer's specifications for comparison: 1) Check the manufacturer data plate/sticker (usually on trailer tongue, A-frame, or left front side), 2) Owner's manual, 3) Dealer sheets, or 4) Manufacturer's website. Look for "Dry Weight" or "UVW" (Unloaded Vehicle Weight) and "GVWR" (Gross Vehicle Weight Rating). Compare these trailer specs against your calculated max towable weight.</div>
-            <p><strong>Important:</strong> Trailer weights are NOT entered in the form above. Find your trailer's "Dry Weight" or "UVW" on the trailer's data plate and ensure it's less than your calculated max towable weight.</p>
+            <div id="trailer-specs-tooltip" class="tooltip-description" role="tooltip">Find your trailer's specifications for comparison: 1) Check the manufacturer data plate/sticker (usually on trailer tongue, A-frame, or left front side), 2) Owner's manual, 3) Dealer sheets, or 4) Manufacturer's website. Look for "Dry Weight" or "UVW" (Unloaded Vehicle Weight) and "GVWR" (Gross Vehicle Weight Rating). Compare these trailer specs against your calculated max towable weight.</div>
+            <p><strong>Important:</strong> Find your trailer's "Dry Weight" or "UVW" on the trailer's data plate and ensure it's less than your calculated max towable weight.</p>
+        </div>
+    </div>
+    
+    <div id="trailer-info-section" style="display: none;">
+        <div class="section-header">
+            <h2>Trailer Information (Optional)</h2>
+            <p class="section-description">If you know your trailer specifications, enter them below for enhanced analysis and safety recommendations.</p>
+        </div>
+        <form id="trailer-form">
+            <label for="trailer-dry-weight">Trailer Dry Weight (UVW): 
+                <span class="tooltip" aria-describedby="trailer-dry-weight-tooltip" role="button" tabindex="0" aria-label="Help for trailer dry weight">?</span>
+            </label>
+            <div id="trailer-dry-weight-tooltip" class="tooltip-description" role="tooltip">Enter your trailer's dry weight or UVW (Unloaded Vehicle Weight) as shown on the manufacturer's data plate. This is the weight of the empty trailer without any cargo, water, or propane. Common values: 2,000-6,000 lbs for travel trailers, 1,000-3,000 lbs for utility trailers.</div>
+            <input type="number" id="trailer-dry-weight" name="trailer-dry-weight" aria-describedby="trailer-dry-weight-tooltip">
+            
+            <label for="trailer-gvwr">Trailer GVWR: 
+                <span class="tooltip" aria-describedby="trailer-gvwr-tooltip" role="button" tabindex="0" aria-label="Help for trailer GVWR">?</span>
+            </label>
+            <div id="trailer-gvwr-tooltip" class="tooltip-description" role="tooltip">Enter your trailer's Gross Vehicle Weight Rating (GVWR) from the manufacturer's data plate. This is the maximum weight the trailer is designed to carry including the trailer itself and all cargo. Should be higher than the dry weight.</div>
+            <input type="number" id="trailer-gvwr" name="trailer-gvwr" aria-describedby="trailer-gvwr-tooltip">
+            
+            <button type="button" id="analyze-trailer-button">Analyze Trailer Compatibility</button>
+        </form>
+        
+        <div id="trailer-analysis" style="display: none;">
+            <h3>Trailer Compatibility Analysis</h3>
+            <div id="trailer-results">
+                <div class="compatibility-result">
+                    <p id="trailer-compatibility-status"></p>
+                </div>
+                <div class="trailer-detailed-results">
+                    <h4>Trailer Loading Capacity</h4>
+                    <p id="trailer-payload-capacity"></p>
+                    <p id="max-trailer-cargo"></p>
+                    <p id="trailer-safety-margin"></p>
+                </div>
+                <div class="loading-recommendations">
+                    <h4>Loading Recommendations</h4>
+                    <p id="recommended-cargo-distribution"></p>
+                    <p id="hitch-weight-analysis"></p>
+                </div>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>

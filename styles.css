@@ -253,3 +253,76 @@ button:hover {
         padding: 0.5rem;
     }
 }
+
+/* Trailer analysis specific styles */
+#trailer-info-section {
+    margin-top: 1.5rem;
+}
+
+#trailer-analysis {
+    background: #fff;
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
+    max-width: 25rem;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.compatibility-result {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #28a745;
+}
+
+.compatibility-result:has([style*="color: red"]) {
+    border-left-color: #dc3545;
+    background-color: #f8d7da;
+}
+
+.trailer-detailed-results {
+    margin-bottom: 1rem;
+}
+
+.trailer-detailed-results h4,
+.loading-recommendations h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    color: #495057;
+}
+
+.loading-recommendations {
+    background-color: #e8f4f8;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border-left: 3px solid #007bff;
+}
+
+@media (prefers-color-scheme: dark) {
+    #trailer-analysis {
+        background: #444;
+        color: #f4f4f4;
+    }
+    
+    .compatibility-result {
+        background-color: #555;
+        border-left-color: #28a745;
+    }
+    
+    .compatibility-result:has([style*="color: red"]) {
+        background-color: #441f20;
+        border-left-color: #dc3545;
+    }
+    
+    .trailer-detailed-results h4,
+    .loading-recommendations h4 {
+        color: #ccc;
+    }
+    
+    .loading-recommendations {
+        background-color: #2d3436;
+        border-left-color: #66b3ff;
+    }
+}
