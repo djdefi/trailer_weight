@@ -51,19 +51,43 @@ unless options[:max_weight]
   exit
 end
 
+# Additional input validation
+if options[:max_weight] <= 0
+  puts 'ERROR: Max combined weight must be positive'
+  exit
+end
+
+if options[:gross_vehicle_weight] && options[:gross_vehicle_weight] <= 0
+  puts 'ERROR: Gross vehicle weight must be positive'
+  exit
+end
+
 # Set defaults
 options[:cargo] ||= [210, 180, 40, 125]
 options[:gross_vehicle_weight] ||= options[:max_weight]
 
+# Validate cargo weights
+if options[:cargo].any? { |weight| weight <= 0 }
+  puts 'ERROR: All cargo weights must be positive'
+  exit
+end
+
+cargo_sum = options[:cargo].sum
+if cargo_sum >= options[:max_weight]
+  puts 'ERROR: Combined cargo weight must be less than max combined weight'
+  exit
+end
+
 # Calculate gross trailer weight
-gross_trailer_weight = (options[:max_weight] - options[:cargo].sum) / 0.13
+# Using 13% rule: remaining payload capacity divided by 0.13 gives max trailer weight
+gross_trailer_weight = (options[:max_weight] - cargo_sum) / 0.13
 gross_trailer_weight = gross_trailer_weight.round
 
 puts "Max towable gross trailer weight: #{gross_trailer_weight}"
 
 # Calculate and display truck weight if gross vehicle weight is provided
 if options[:gross_vehicle_weight] != options[:max_weight]
-  truck_weight = options[:gross_vehicle_weight] - (options[:max_weight] - options[:cargo].sum)
+  truck_weight = options[:gross_vehicle_weight] - (options[:max_weight] - cargo_sum)
   puts "Loaded Truck weight: #{truck_weight}"
 
   alt_weight = options[:gross_vehicle_weight] - truck_weight
@@ -72,7 +96,7 @@ end
 
 # Output additional information if verbose mode is enabled
 if options[:verbose]
-  puts "Combined cargo weight: #{options[:cargo].sum}"
+  puts "Combined cargo weight: #{cargo_sum}"
   puts "Max combined weight: #{options[:max_weight]}"
   puts "Gross vehicle weight: #{options[:gross_vehicle_weight]}"
 end

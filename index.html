@@ -10,22 +10,22 @@
     <h1>Trailer Weight Calculator</h1>
     <form id="calculator-form">
         <label for="cargo">Cargo Weights (comma separated): 
-            <span class="tooltip" aria-describedby="cargo-tooltip">?</span>
+            <span class="tooltip" aria-describedby="cargo-tooltip" role="button" tabindex="0" aria-label="Help for cargo weights">?</span>
         </label>
-        <div id="cargo-tooltip" class="tooltip-description">Enter the weights of all cargo items separated by commas. Example: 210,180,40,125</div>
-        <input type="text" id="cargo" name="cargo" required>
+        <div id="cargo-tooltip" class="tooltip-description" role="tooltip">Enter the weights of all cargo items separated by commas. Example: 210,180,40,125</div>
+        <input type="text" id="cargo" name="cargo" required aria-describedby="cargo-tooltip">
         
         <label for="max-weight">Max Combined Weight: 
-            <span class="tooltip" aria-describedby="max-weight-tooltip">?</span>
+            <span class="tooltip" aria-describedby="max-weight-tooltip" role="button" tabindex="0" aria-label="Help for max combined weight">?</span>
         </label>
-        <div id="max-weight-tooltip" class="tooltip-description">Enter the maximum combined weight of cargo and occupants. This value can be found on the yellow payload sticker inside the driver side door. Example: 1500</div>
-        <input type="number" id="max-weight" name="max-weight" required>
+        <div id="max-weight-tooltip" class="tooltip-description" role="tooltip">Enter the maximum combined weight of cargo and occupants. This value can be found on the yellow payload sticker inside the driver side door. Example: 1500</div>
+        <input type="number" id="max-weight" name="max-weight" required aria-describedby="max-weight-tooltip">
         
         <label for="gross-vehicle-weight">Gross Vehicle Weight: 
-            <span class="tooltip" aria-describedby="gross-vehicle-weight-tooltip">?</span>
+            <span class="tooltip" aria-describedby="gross-vehicle-weight-tooltip" role="button" tabindex="0" aria-label="Help for gross vehicle weight">?</span>
         </label>
-        <div id="gross-vehicle-weight-tooltip" class="tooltip-description">Enter the gross vehicle weight (GVWR). This value can be found on the gross vehicle weight sticker inside the driver side door. Example: 7350</div>
-        <input type="number" id="gross-vehicle-weight" name="gross-vehicle-weight" required>
+        <div id="gross-vehicle-weight-tooltip" class="tooltip-description" role="tooltip">Enter the gross vehicle weight (GVWR). This value can be found on the gross vehicle weight sticker inside the driver side door. Example: 7350</div>
+        <input type="number" id="gross-vehicle-weight" name="gross-vehicle-weight" required aria-describedby="gross-vehicle-weight-tooltip">
         
         <button type="button" id="calculate-button">Calculate</button>
     </form>

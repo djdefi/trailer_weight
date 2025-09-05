@@ -10,12 +10,53 @@ document.addEventListener('DOMContentLoaded', function() {
     const grossVehicleWeightResult = document.getElementById('gross-vehicle-weight-result');
 
     calculateButton.addEventListener('click', function() {
-        const cargo = form.cargo.value.split(',').map(Number);
-        const maxWeight = parseInt(form['max-weight'].value);
-        const grossVehicleWeight = parseInt(form['gross-vehicle-weight'].value);
-
+        // Clear any previous error messages
+        clearErrors();
+        
+        // Parse and validate inputs
+        const cargoInput = form.cargo.value.trim();
+        if (!cargoInput) {
+            showError('Please enter cargo weights');
+            return;
+        }
+        
+        let cargo;
+        try {
+            cargo = cargoInput.split(',').map(item => {
+                const weight = parseFloat(item.trim());
+                if (isNaN(weight) || weight <= 0) {
+                    throw new Error('All cargo weights must be positive numbers');
+                }
+                return weight;
+            });
+        } catch (error) {
+            showError(error.message);
+            return;
+        }
+        
+        const maxWeight = parseFloat(form['max-weight'].value);
+        const grossVehicleWeight = parseFloat(form['gross-vehicle-weight'].value);
+        
+        // Validate inputs
+        if (isNaN(maxWeight) || maxWeight <= 0) {
+            showError('Max combined weight must be a positive number');
+            return;
+        }
+        
+        if (isNaN(grossVehicleWeight) || grossVehicleWeight <= 0) {
+            showError('Gross vehicle weight must be a positive number');
+            return;
+        }
+        
         const combinedCargoWeightValue = cargo.reduce((a, b) => a + b, 0);
-        const maxTrailerWeightValue = ((maxWeight - combinedCargoWeightValue) / 0.13).toFixed(2);
+        
+        if (combinedCargoWeightValue >= maxWeight) {
+            showError('Combined cargo weight must be less than max combined weight');
+            return;
+        }
+        
+        // Calculate results using 13% rule: remaining payload capacity divided by 0.13 gives max trailer weight
+        const maxTrailerWeightValue = Math.round((maxWeight - combinedCargoWeightValue) / 0.13);
         const loadedTruckWeightValue = grossVehicleWeight - (maxWeight - combinedCargoWeightValue);
         const remainingWeightValue = grossVehicleWeight - loadedTruckWeightValue;
 
@@ -28,4 +69,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
         results.style.display = 'block';
     });
+    
+    function showError(message) {
+        clearErrors();
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.textContent = `Error: ${message}`;
+        errorDiv.style.color = 'red';
+        errorDiv.style.marginBottom = '10px';
+        errorDiv.style.fontWeight = 'bold';
+        form.insertBefore(errorDiv, form.firstChild);
+    }
+    
+    function clearErrors() {
+        const existingErrors = form.querySelectorAll('.error-message');
+        existingErrors.forEach(error => error.remove());
+        results.style.display = 'none';
+    }
 });
