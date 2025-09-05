@@ -31,12 +31,25 @@
     </form>
     <div id="results">
         <h2>Results</h2>
-        <p id="max-trailer-weight"></p>
-        <p id="loaded-truck-weight"></p>
-        <p id="remaining-weight"></p>
-        <p id="combined-cargo-weight"></p>
-        <p id="max-combined-weight"></p>
-        <p id="gross-vehicle-weight-result"></p>
+        <div class="primary-result">
+            <p id="max-trailer-weight"></p>
+        </div>
+        <div class="detailed-results">
+            <p id="loaded-truck-weight"></p>
+            <p id="remaining-weight"></p>
+            <p id="combined-cargo-weight"></p>
+        </div>
+        <div class="weight-distribution">
+            <h3>Weight Distribution Analysis</h3>
+            <p id="hitch-weight"></p>
+            <p id="payload-utilization"></p>
+            <p id="weight-distribution-ratio"></p>
+        </div>
+        <div class="reference-values">
+            <h3>Reference Values</h3>
+            <p id="max-combined-weight"></p>
+            <p id="gross-vehicle-weight-result"></p>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>

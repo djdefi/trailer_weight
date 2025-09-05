@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const combinedCargoWeight = document.getElementById('combined-cargo-weight');
     const maxCombinedWeight = document.getElementById('max-combined-weight');
     const grossVehicleWeightResult = document.getElementById('gross-vehicle-weight-result');
+    const hitchWeight = document.getElementById('hitch-weight');
+    const payloadUtilization = document.getElementById('payload-utilization');
+    const weightDistributionRatio = document.getElementById('weight-distribution-ratio');
 
     calculateButton.addEventListener('click', function() {
         // Clear any previous error messages
@@ -59,13 +62,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const maxTrailerWeightValue = Math.round((maxWeight - combinedCargoWeightValue) / 0.13);
         const loadedTruckWeightValue = grossVehicleWeight - (maxWeight - combinedCargoWeightValue);
         const remainingWeightValue = grossVehicleWeight - loadedTruckWeightValue;
+        
+        // Calculate additional weight distribution metrics
+        const hitchWeightValue = Math.round(maxTrailerWeightValue * 0.13); // 13% of trailer weight for hitch weight
+        const payloadUtilizationValue = Math.round((combinedCargoWeightValue / maxWeight) * 100);
+        const remainingCapacityPercentage = Math.round(((maxWeight - combinedCargoWeightValue) / maxWeight) * 100);
 
-        maxTrailerWeight.textContent = `Max towable gross trailer weight: ${maxTrailerWeightValue}`;
-        loadedTruckWeight.textContent = `Loaded Truck weight: ${loadedTruckWeightValue}`;
-        remainingWeight.textContent = `Remaining weight: ${remainingWeightValue}`;
-        combinedCargoWeight.textContent = `Combined cargo weight: ${combinedCargoWeightValue}`;
-        maxCombinedWeight.textContent = `Max combined weight: ${maxWeight}`;
-        grossVehicleWeightResult.textContent = `Gross vehicle weight: ${grossVehicleWeight}`;
+        maxTrailerWeight.textContent = `Max towable gross trailer weight: ${maxTrailerWeightValue} lbs`;
+        loadedTruckWeight.textContent = `Loaded Truck weight: ${loadedTruckWeightValue} lbs`;
+        remainingWeight.textContent = `Remaining weight: ${remainingWeightValue} lbs`;
+        combinedCargoWeight.textContent = `Combined cargo weight: ${combinedCargoWeightValue} lbs`;
+        maxCombinedWeight.textContent = `Max combined weight: ${maxWeight} lbs`;
+        grossVehicleWeightResult.textContent = `Gross vehicle weight: ${grossVehicleWeight} lbs`;
+        hitchWeight.textContent = `Estimated hitch weight (13%): ${hitchWeightValue} lbs`;
+        payloadUtilization.textContent = `Payload utilization: ${payloadUtilizationValue}%`;
+        weightDistributionRatio.textContent = `Remaining capacity: ${remainingCapacityPercentage}%`;
 
         results.style.display = 'block';
     });
