@@ -8,35 +8,101 @@
 </head>
 <body>
     <h1>Trailer Weight Calculator</h1>
+    <div class="section-header">
+        <h2>Tow Vehicle Information</h2>
+        <p class="section-description">Enter information from your truck/tow vehicle only. Trailer specifications are found separately for comparison.</p>
+    </div>
     <form id="calculator-form">
         <label for="cargo">Cargo Weights (comma separated): 
-            <span class="tooltip" aria-describedby="cargo-tooltip">?</span>
+            <span class="tooltip" aria-describedby="cargo-tooltip" role="button" tabindex="0" aria-label="Help for cargo weights">?</span>
         </label>
-        <div id="cargo-tooltip" class="tooltip-description">Enter the weights of all cargo items separated by commas. Example: 210,180,40,125</div>
-        <input type="text" id="cargo" name="cargo" required>
+        <div id="cargo-tooltip" class="tooltip-description" role="tooltip">Enter the weights of all cargo items you're putting IN YOUR TRUCK (bed, cab, etc.) separated by commas. Include items like tools, coolers, camping gear, luggage, etc. Use a bathroom scale or check item labels for weights. Examples: 210,180,40,125 (toolbox, cooler, camping chairs, luggage) or 150,75,30 (generator, tent, supplies). NOTE: This is cargo in your truck, not in the trailer.</div>
+        <input type="text" id="cargo" name="cargo" required aria-describedby="cargo-tooltip">
         
         <label for="max-weight">Max Combined Weight: 
-            <span class="tooltip" aria-describedby="max-weight-tooltip">?</span>
+            <span class="tooltip" aria-describedby="max-weight-tooltip" role="button" tabindex="0" aria-label="Help for max combined weight">?</span>
         </label>
-        <div id="max-weight-tooltip" class="tooltip-description">Enter the maximum combined weight of cargo and occupants. This value can be found on the yellow payload sticker inside the driver side door. Example: 1500</div>
-        <input type="number" id="max-weight" name="max-weight" required>
+        <div id="max-weight-tooltip" class="tooltip-description" role="tooltip">Enter the maximum combined weight of cargo and occupants for YOUR TRUCK. Look for a yellow payload capacity sticker on the driver's side door jamb (the area where the door closes). The sticker will say "The combined weight of occupants and cargo should never exceed: XXXX lbs". Common values: 1,500-2,500 lbs for most trucks. This is from your truck's specifications, not the trailer.</div>
+        <input type="number" id="max-weight" name="max-weight" required aria-describedby="max-weight-tooltip">
         
         <label for="gross-vehicle-weight">Gross Vehicle Weight: 
-            <span class="tooltip" aria-describedby="gross-vehicle-weight-tooltip">?</span>
+            <span class="tooltip" aria-describedby="gross-vehicle-weight-tooltip" role="button" tabindex="0" aria-label="Help for gross vehicle weight">?</span>
         </label>
-        <div id="gross-vehicle-weight-tooltip" class="tooltip-description">Enter the gross vehicle weight (GVWR). This value can be found on the gross vehicle weight sticker inside the driver side door. Example: 7350</div>
-        <input type="number" id="gross-vehicle-weight" name="gross-vehicle-weight" required>
+        <div id="gross-vehicle-weight-tooltip" class="tooltip-description" role="tooltip">Enter YOUR TRUCK'S Gross Vehicle Weight Rating (GVWR). Look for a certification label on the driver's side door jamb that shows "GVWR" followed by a weight in pounds. This is typically below the Ford Motor Company manufacturing information. Common values: 6,000-8,500 lbs for pickup trucks. Example: 7350. This is from your truck's door sticker, not the trailer.</div>
+        <input type="number" id="gross-vehicle-weight" name="gross-vehicle-weight" required aria-describedby="gross-vehicle-weight-tooltip">
         
         <button type="button" id="calculate-button">Calculate</button>
     </form>
     <div id="results">
         <h2>Results</h2>
-        <p id="max-trailer-weight"></p>
-        <p id="loaded-truck-weight"></p>
-        <p id="remaining-weight"></p>
-        <p id="combined-cargo-weight"></p>
-        <p id="max-combined-weight"></p>
-        <p id="gross-vehicle-weight-result"></p>
+        <div class="primary-result">
+            <p id="max-trailer-weight"></p>
+        </div>
+        <div class="detailed-results">
+            <p id="loaded-truck-weight"></p>
+            <p id="remaining-weight"></p>
+            <p id="combined-cargo-weight"></p>
+        </div>
+        <div class="weight-distribution">
+            <h3>Weight Distribution Analysis</h3>
+            <p id="hitch-weight"></p>
+            <p id="payload-utilization"></p>
+            <p id="weight-distribution-ratio"></p>
+        </div>
+        <div class="reference-values">
+            <h3>Reference Values</h3>
+            <p id="max-combined-weight"></p>
+            <p id="gross-vehicle-weight-result"></p>
+        </div>
+        <div class="trailer-guidance">
+            <h3>Using Trailer Specifications for Comparison 
+                <span class="tooltip" aria-describedby="trailer-specs-tooltip" role="button" tabindex="0" aria-label="Help for using trailer specifications">?</span>
+            </h3>
+            <div id="trailer-specs-tooltip" class="tooltip-description" role="tooltip">Find your trailer's specifications for comparison: 1) Check the manufacturer data plate/sticker (usually on trailer tongue, A-frame, or left front side), 2) Owner's manual, 3) Dealer sheets, or 4) Manufacturer's website. Look for "Dry Weight" or "UVW" (Unloaded Vehicle Weight) and "GVWR" (Gross Vehicle Weight Rating). Compare these trailer specs against your calculated max towable weight.</div>
+            <p><strong>Important:</strong> Find your trailer's "Dry Weight" or "UVW" on the trailer's data plate and ensure it's less than your calculated max towable weight.</p>
+        </div>
+    </div>
+    
+    <div id="trailer-info-section" style="display: none;">
+        <div class="section-header">
+            <h2>Trailer Information (Optional)</h2>
+            <p class="section-description">If you know your trailer specifications, enter them below for enhanced analysis and safety recommendations.</p>
+        </div>
+        <form id="trailer-form">
+            <label for="trailer-dry-weight">Trailer Dry Weight (UVW): 
+                <span class="tooltip" aria-describedby="trailer-dry-weight-tooltip" role="button" tabindex="0" aria-label="Help for trailer dry weight">?</span>
+            </label>
+            <div id="trailer-dry-weight-tooltip" class="tooltip-description" role="tooltip">Enter your trailer's dry weight or UVW (Unloaded Vehicle Weight) as shown on the manufacturer's data plate. This is the weight of the empty trailer without any cargo, water, or propane. Common values: 2,000-6,000 lbs for travel trailers, 1,000-3,000 lbs for utility trailers.</div>
+            <input type="number" id="trailer-dry-weight" name="trailer-dry-weight" aria-describedby="trailer-dry-weight-tooltip">
+            
+            <label for="trailer-gvwr">Trailer GVWR: 
+                <span class="tooltip" aria-describedby="trailer-gvwr-tooltip" role="button" tabindex="0" aria-label="Help for trailer GVWR">?</span>
+            </label>
+            <div id="trailer-gvwr-tooltip" class="tooltip-description" role="tooltip">Enter your trailer's Gross Vehicle Weight Rating (GVWR) from the manufacturer's data plate. This is the maximum weight the trailer is designed to carry including the trailer itself and all cargo. Should be higher than the dry weight.</div>
+            <input type="number" id="trailer-gvwr" name="trailer-gvwr" aria-describedby="trailer-gvwr-tooltip">
+            
+            <button type="button" id="analyze-trailer-button">Analyze Trailer Compatibility</button>
+        </form>
+        
+        <div id="trailer-analysis" style="display: none;">
+            <h3>Trailer Compatibility Analysis</h3>
+            <div id="trailer-results">
+                <div class="compatibility-result">
+                    <p id="trailer-compatibility-status"></p>
+                </div>
+                <div class="trailer-detailed-results">
+                    <h4>Trailer Loading Capacity</h4>
+                    <p id="trailer-payload-capacity"></p>
+                    <p id="max-trailer-cargo"></p>
+                    <p id="trailer-safety-margin"></p>
+                </div>
+                <div class="loading-recommendations">
+                    <h4>Loading Recommendations</h4>
+                    <p id="recommended-cargo-distribution"></p>
+                    <p id="hitch-weight-analysis"></p>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>

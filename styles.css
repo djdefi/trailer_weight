@@ -15,6 +15,24 @@ h1 {
     color: #333;
 }
 
+.section-header {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.section-header h2 {
+    color: #007bff;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+}
+
+.section-description {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin: 0;
+    font-style: italic;
+}
+
 form {
     background: #fff;
     padding: 1.25rem;
@@ -72,15 +90,81 @@ button:hover {
     margin: 0.3125rem 0;
 }
 
+.primary-result {
+    background-color: #e8f4f8;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border-left: 4px solid #007bff;
+    margin-bottom: 1rem;
+}
+
+.primary-result p {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #0056b3;
+    margin: 0;
+}
+
+.detailed-results {
+    margin-bottom: 1rem;
+}
+
+.weight-distribution {
+    background-color: #f8f9fa;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.weight-distribution h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    color: #495057;
+}
+
+.reference-values {
+    padding-top: 0.75rem;
+    border-top: 1px solid #dee2e6;
+}
+
+.reference-values h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    color: #495057;
+}
+
 .tooltip {
     display: inline-block;
     margin-left: 0.3125rem;
     cursor: pointer;
     color: #007bff;
+    border-radius: 50%;
+    width: 1.25rem;
+    height: 1.25rem;
+    text-align: center;
+    font-weight: bold;
 }
 
-.tooltip:hover {
+.tooltip:hover,
+.tooltip:focus {
     color: #0056b3;
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+}
+
+.tooltip-description {
+    display: none;
+    margin-bottom: 0.625rem;
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+.tooltip-description.show {
+    display: block;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -108,6 +192,52 @@ button:hover {
     button:hover {
         background-color: #007bff;
     }
+
+    .tooltip {
+        color: #66b3ff;
+    }
+
+    .tooltip:hover,
+    .tooltip:focus {
+        color: #99ccff;
+        outline: 2px solid #66b3ff;
+    }
+
+    .tooltip-description {
+        background-color: #555;
+        border: 1px solid #666;
+        color: #ccc;
+    }
+
+    .primary-result {
+        background-color: #2d3436;
+        border-left: 4px solid #66b3ff;
+    }
+
+    .primary-result p {
+        color: #99ccff;
+    }
+
+    .weight-distribution {
+        background-color: #555;
+    }
+
+    .weight-distribution h3,
+    .reference-values h3 {
+        color: #ccc;
+    }
+
+    .reference-values {
+        border-top: 1px solid #666;
+    }
+
+    .section-header h2 {
+        color: #66b3ff;
+    }
+
+    .section-description {
+        color: #ccc;
+    }
 }
 
 @media (max-width: 37.5rem) {
@@ -121,5 +251,78 @@ button:hover {
     button {
         font-size: 0.875rem;
         padding: 0.5rem;
+    }
+}
+
+/* Trailer analysis specific styles */
+#trailer-info-section {
+    margin-top: 1.5rem;
+}
+
+#trailer-analysis {
+    background: #fff;
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
+    max-width: 25rem;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.compatibility-result {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #28a745;
+}
+
+.compatibility-result:has([style*="color: red"]) {
+    border-left-color: #dc3545;
+    background-color: #f8d7da;
+}
+
+.trailer-detailed-results {
+    margin-bottom: 1rem;
+}
+
+.trailer-detailed-results h4,
+.loading-recommendations h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    color: #495057;
+}
+
+.loading-recommendations {
+    background-color: #e8f4f8;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border-left: 3px solid #007bff;
+}
+
+@media (prefers-color-scheme: dark) {
+    #trailer-analysis {
+        background: #444;
+        color: #f4f4f4;
+    }
+    
+    .compatibility-result {
+        background-color: #555;
+        border-left-color: #28a745;
+    }
+    
+    .compatibility-result:has([style*="color: red"]) {
+        background-color: #441f20;
+        border-left-color: #dc3545;
+    }
+    
+    .trailer-detailed-results h4,
+    .loading-recommendations h4 {
+        color: #ccc;
+    }
+    
+    .loading-recommendations {
+        background-color: #2d3436;
+        border-left-color: #66b3ff;
     }
 }
